@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Rentas - Lonas Cadereyta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-800 text-white min-h-screen">
+            <div class="p-4">
+                <h1 class="text-xl font-bold">Lonas Cadereyta</h1>
+                <p class="text-sm text-blue-200">Panel de control</p>
+            </div>
+            <nav class="mt-6">
+                <a href="index.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-home mr-2"></i>Panel Principal
+                </a>
+                <a href="pedidos.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-box mr-2"></i>Pedidos
+                </a>
+                <a href="rentas.html" class="block py-2 px-4 bg-blue-700">
+                    <i class="fas fa-truck mr-2"></i>Rentas
+                </a>
+                <a href="entregas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-shipping-fast mr-2"></i>Entregas
+                </a>
+                <a href="nuevo.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-plus-circle mr-2"></i>Nuevo Pedido
+                </a>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="flex-1 p-6">
+            <header class="mb-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Gestión de Rentas</h1>
+                    <p class="text-gray-600">Administra las rentas activas y vencidas</p>
+                </div>
+                <button id="btnNuevaRenta" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-plus mr-2"></i>Nueva Renta
+                </button>
+            </header>
+
+            <!-- Filtros -->
+            <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <h2 class="text-lg font-semibold mb-4">Filtros de Rentas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+                        <select id="filtroEstadoRenta" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Todas</option>
+                            <option value="activa">Activas</option>
+                            <option value="vencida">Vencidas</option>
+                            <option value="devuelta">Devueltas</option>
+                            <option value="pendiente">Pendientes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Cliente</label>
+                        <input type="text" id="filtroClienteRenta" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Vencimiento</label>
+                        <input type="date" id="filtroFechaRenta" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button id="btnAplicarFiltrosRenta" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        Aplicar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de rentas -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Lista de Rentas</h2>
+                    <div class="text-sm text-gray-500">
+                        <span id="totalRentas">0</span> rentas encontradas
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Folio</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Artículo</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Entrega</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Devolución</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="tablaRentas">
+                            <!-- Los datos se cargarán con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para nueva renta -->
+    <div id="modalRenta" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h3 class="text-xl font-bold mb-4">Nueva Renta</h3>
+            <form id="formNuevaRenta">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Folio</label>
+                        <input type="text" id="rentaFolio" class="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-100" readonly>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Cliente *</label>
+                        <input type="text" id="rentaCliente" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+                        <input type="tel" id="rentaTelefono" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Artículo *</label>
+                        <input type="text" id="rentaArticulo" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Entrega *</label>
+                        <input type="date" id="rentaFechaEntrega" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Devolución *</label>
+                        <input type="date" id="rentaFechaDevolucion" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Monto Total *</label>
+                        <input type="number" step="0.01" id="rentaMonto" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Depósito</label>
+                        <select id="rentaDeposito" class="w-full border border-gray-300 rounded-md px-3 py-2">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Dirección de Entrega</label>
+                    <textarea id="rentaDireccion" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2"></textarea>
+                </div>
+                <div class="mt-6 flex justify-end space-x-4">
+                    <button type="button" id="btnCancelarRenta" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        Guardar Renta
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+ </div><script type="module">
+    // Configuración de Supabase
+   const supabaseUrl = 'https://bxndijuuhmcklkiemtqr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4bmRpanV1aG1ja2xraWVtdHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyOTE1MzAsImV4cCI6MjA3Nzg2NzUzMH0.kwGLHv_hqrVxtbS5oeiMEQYf-ebJLKOE1n05KLtEpFY';
+        
+</script>
+    <script src="js/database.js"></script>
+    <script src="js/rentas.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos - Lonas Cadereyta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar (mismo que index.html) -->
+        <div class="w-64 bg-blue-800 text-white min-h-screen">
+            <div class="p-4">
+                <h1 class="text-xl font-bold">Lonas Cadereyta</h1>
+                <p class="text-sm text-blue-200">Panel de control</p>
+            </div>
+            <nav class="mt-6">
+                <a href="index.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-home mr-2"></i>Panel Principal
+                </a>
+                <a href="pedidos.html" class="block py-2 px-4 bg-blue-700">
+                    <i class="fas fa-box mr-2"></i>Pedidos
+                </a>
+                <a href="rentas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-truck mr-2"></i>Rentas
+                </a>
+                <a href="entregas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-shipping-fast mr-2"></i>Entregas
+                </a>
+                <a href="nuevo.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-plus-circle mr-2"></i>Nuevo Pedido
+                </a>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="flex-1 p-6">
+            <header class="mb-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Gestión de Pedidos</h1>
+                    <p class="text-gray-600">Administra y consulta todos los pedidos</p>
+                </div>
+                <a href="nuevo.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-plus mr-2"></i>Nuevo Pedido
+                </a>
+            </header>
+
+            <!-- Filtros -->
+            <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <h2 class="text-lg font-semibold mb-4">Filtros de Búsqueda</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Cliente</label>
+                        <input type="text" id="filtroCliente" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                        <input type="text" id="filtroTelefono" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+                        <select id="filtroEstado" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Todos</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="autorizado">Autorizado</option>
+                            <option value="no-autorizado">No Autorizado</option>
+                            <option value="produccion">En Producción</option>
+                            <option value="listo">Listo</option>
+                            <option value="entregado">Entregado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Instalación</label>
+                        <select id="filtroInstalacion" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Todos</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="instalada">Instalada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between">
+                    <button id="btnAplicarFiltros" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        Aplicar Filtros
+                    </button>
+                    <button id="btnExportarExcel" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                        <i class="fas fa-file-excel mr-2"></i>Exportar a Excel
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de pedidos -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Lista de Pedidos</h2>
+                    <div class="text-sm text-gray-500">
+                        <span id="totalPedidos">0</span> pedidos encontrados
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Folio</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Instalación</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Entrega</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="tablaPedidos">
+                            <!-- Los datos se cargarán con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div><script type="module">
+    // Configuración de Supabase
+   const supabaseUrl = 'https://bxndijuuhmcklkiemtqr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4bmRpanV1aG1ja2xraWVtdHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyOTE1MzAsImV4cCI6MjA3Nzg2NzUzMH0.kwGLHv_hqrVxtbS5oeiMEQYf-ebJLKOE1n05KLtEpFY';
+        
+</script>
+    <script src="js/database.js"></script>
+    <script src="js/pedidos.js"></script>
+</body>
+</html>

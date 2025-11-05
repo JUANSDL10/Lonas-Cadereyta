@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Pedido - Lonas Cadereyta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-800 text-white min-h-screen">
+            <div class="p-4">
+                <h1 class="text-xl font-bold">Lonas Cadereyta</h1>
+                <p class="text-sm text-blue-200">Panel de control</p>
+            </div>
+            <nav class="mt-6">
+                <a href="index.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-home mr-2"></i>Panel Principal
+                </a>
+                <a href="pedidos.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-box mr-2"></i>Pedidos
+                </a>
+                <a href="rentas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-truck mr-2"></i>Rentas
+                </a>
+                <a href="entregas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-shipping-fast mr-2"></i>Entregas
+                </a>
+                <a href="nuevo.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-plus-circle mr-2"></i>Nuevo Pedido
+                </a>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="flex-1 p-6">
+            <header class="mb-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Detalle del Pedido</h1>
+                    <p class="text-gray-600">Información completa del pedido</p>
+                </div>
+                <div class="space-x-2">
+                    <button id="btnImprimir" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                        <i class="fas fa-print mr-2"></i>Imprimir
+                    </button>
+                    <button id="btnEditar" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-edit mr-2"></i>Editar
+                    </button>
+                </div>
+            </header>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Información principal -->
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Información del Pedido</h2>
+                        <div class="space-y-3">
+                            <div class="flex">
+                                <span class="font-medium w-40">Folio:</span>
+                                <span id="detalleFolio">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Cliente:</span>
+                                <span id="detalleCliente">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Teléfono:</span>
+                                <span id="detalleTelefono">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Dirección:</span>
+                                <span id="detalleDireccion">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Estado:</span>
+                                <span id="detalleEstado" class="px-2 py-1 rounded-full text-xs font-medium"></span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Instalación:</span>
+                                <span id="detalleInstalacion" class="px-2 py-1 rounded-full text-xs font-medium"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información adicional -->
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Detalles Adicionales</h2>
+                        <div class="space-y-3">
+                            <div class="flex">
+                                <span class="font-medium w-40">Fecha de Entrega:</span>
+                                <span id="detalleFechaEntrega">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Pago:</span>
+                                <span id="detallePago" class="px-2 py-1 rounded-full text-xs font-medium"></span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Arte Aprobado:</span>
+                                <span id="detalleArte">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Vendedor:</span>
+                                <span id="detalleVendedor">-</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-medium w-40">Fecha Creación:</span>
+                                <span id="detalleFechaCreacion">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descripción del trabajo -->
+                <div class="mt-6">
+                    <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Descripción del Trabajo</h2>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <p id="detalleDescripcion" class="text-gray-700">-</p>
+                    </div>
+                </div>
+
+                <!-- Información de cantidad y precio -->
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Detalles del Producto</h2>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Cantidad:</span>
+                                <span id="detalleCantidad">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Precio Unitario:</span>
+                                <span id="detallePrecioUnitario">-</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-bold border-t pt-2">
+                                <span>Precio Total:</span>
+                                <span id="detallePrecioTotal">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Código QR</h2>
+                        <div class="flex justify-center">
+                            <div id="qrcode" class="bg-white p-4 rounded-lg border"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial de actualizaciones -->
+                <div class="mt-6">
+                    <h2 class="text-lg font-semibold mb-4 pb-2 border-b">Historial</h2>
+                    <div class="space-y-2" id="historialPedido">
+                        <!-- El historial se cargará con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><script type="module">
+    // Configuración de Supabase
+   const supabaseUrl = 'https://bxndijuuhmcklkiemtqr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4bmRpanV1aG1ja2xraWVtdHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyOTE1MzAsImV4cCI6MjA3Nzg2NzUzMH0.kwGLHv_hqrVxtbS5oeiMEQYf-ebJLKOE1n05KLtEpFY';
+        
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/detalle.js"></script>
+</body>
+</html>

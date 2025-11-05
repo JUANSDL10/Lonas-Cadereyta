@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Control - Lonas Cadereyta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="flex">
+      <div class="w-64 bg-blue-800 text-white min-h-screen">
+        <div class="p-4">
+          <h1 class="text-xl font-bold">Lonas Cadereyta</h1>
+          <p class="text-sm text-blue-200">Panel de control</p>
+        </div>
+        <nav class="mt-6">
+          <a href="index.html" class="block py-2 px-4 bg-blue-700">
+            <i class="fas fa-home mr-2"></i>Panel Principal
+          </a>
+          <a href="pedidos.html" class="block py-2 px-4 hover:bg-blue-700">
+            <i class="fas fa-box mr-2"></i>Pedidos
+          </a>
+          <a href="rentas.html" class="block py-2 px-4 hover:bg-blue-700">
+            <i class="fas fa-truck mr-2"></i>Rentas
+          </a>
+          <a href="entregas.html" class="block py-2 px-4 hover:bg-blue-700">
+            <i class="fas fa-shipping-fast mr-2"></i>Entregas
+          </a>
+          <a href="nuevo.html" class="block py-2 px-4 hover:bg-blue-700">
+            <i class="fas fa-plus-circle mr-2"></i>Nuevo Pedido
+          </a>
+        </nav>
+        <div class="absolute bottom-0 w-64 p-4 border-t border-blue-700">
+          <div class="flex items-center">
+            <div
+              class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm">Usuario</p>
+              <p class="text-xs text-blue-300">Administrador</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido principal -->
+      <div class="flex-1 p-6">
+        <header class="mb-6">
+          <h1 class="text-2xl font-bold text-gray-800">Panel Principal</h1>
+          <p class="text-gray-600">Resumen de actividad y estadísticas</p>
+        </header>
+
+        <!-- Tarjetas de resumen -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-sm text-gray-500">Pedidos del Día</p>
+                <p class="text-2xl font-bold">12</p>
+              </div>
+              <div class="bg-blue-100 p-3 rounded-full">
+                <i class="fas fa-shopping-cart text-blue-500"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-sm text-gray-500">Pendientes Autorización</p>
+                <p class="text-2xl font-bold">5</p>
+              </div>
+              <div class="bg-yellow-100 p-3 rounded-full">
+                <i class="fas fa-clock text-yellow-500"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-sm text-gray-500">En Producción</p>
+                <p class="text-2xl font-bold">8</p>
+              </div>
+              <div class="bg-blue-100 p-3 rounded-full">
+                <i class="fas fa-cogs text-blue-500"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-sm text-gray-500">Instalaciones Pendientes</p>
+                <p class="text-2xl font-bold">3</p>
+              </div>
+              <div class="bg-red-100 p-3 rounded-full">
+                <i class="fas fa-tools text-red-500"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfica y accesos rápidos -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Gráfica -->
+          <div class="lg:col-span-2 bg-white rounded-lg shadow p-4">
+            <h2 class="text-lg font-semibold mb-4">Estadísticas de Pedidos</h2>
+            <div class="h-64">
+              <canvas id="pedidosChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Accesos rápidos -->
+          <div class="bg-white rounded-lg shadow p-4">
+            <h2 class="text-lg font-semibold mb-4">Accesos Rápidos</h2>
+            <div class="space-y-3">
+              <a
+                href="nuevo.html"
+                class="flex items-center p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100"
+              >
+                <i class="fas fa-plus-circle mr-3"></i>
+                <span>Nuevo Pedido</span>
+              </a>
+              <a
+                href="pedidos.html?filter=pending"
+                class="flex items-center p-3 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100"
+              >
+                <i class="fas fa-clock mr-3"></i>
+                <span>Pedidos Pendientes</span>
+              </a>
+              <a
+                href="pedidos.html?filter=authorized"
+                class="flex items-center p-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100"
+              >
+                <i class="fas fa-check-circle mr-3"></i>
+                <span>Pedidos Autorizados</span>
+              </a>
+              <a
+                href="entregas.html"
+                class="flex items-center p-3 bg-red-50 text-red-700 rounded-lg hover:bg-red-100"
+              >
+                <i class="fas fa-tools mr-3"></i>
+                <span>Instalaciones Pendientes</span>
+              </a>
+              <a
+                href="rentas.html"
+                class="flex items-center p-3 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100"
+              >
+                <i class="fas fa-truck mr-3"></i>
+                <span>Rentas Activas</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla de pedidos recientes -->
+        <div class="mt-6 bg-white rounded-lg shadow">
+          <div class="p-4 border-b">
+            <h2 class="text-lg font-semibold">Pedidos Recientes</h2>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Folio
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Cliente
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Estado
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Instalación
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Fecha Entrega
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="bg-white divide-y divide-gray-200"
+                id="tablaPedidosRecientes"
+              >
+                <!-- Los datos se cargarán con JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/database.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Inicializar gráfica
+        const ctx = document.getElementById("pedidosChart").getContext("2d");
+        const pedidosChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+            datasets: [
+              {
+                label: "Pedidos Completados",
+                data: [12, 19, 15, 25, 22, 30],
+                backgroundColor: "rgba(54, 162, 235, 0.5)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+              },
+              {
+                label: "Rentas Activas",
+                data: [8, 12, 10, 15, 18, 20],
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+
+        // Cargar pedidos recientes
+        cargarPedidosRecientes();
+      });
+    </script>
+  </body>
+</html>

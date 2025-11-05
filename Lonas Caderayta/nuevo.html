@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pedido - Lonas Cadereyta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-800 text-white min-h-screen">
+            <div class="p-4">
+                <h1 class="text-xl font-bold">Lonas Cadereyta</h1>
+                <p class="text-sm text-blue-200">Panel de control</p>
+            </div>
+            <nav class="mt-6">
+                <a href="index.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-home mr-2"></i>Panel Principal
+                </a>
+                <a href="pedidos.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-box mr-2"></i>Pedidos
+                </a>
+                <a href="rentas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-truck mr-2"></i>Rentas
+                </a>
+                <a href="entregas.html" class="block py-2 px-4 hover:bg-blue-700">
+                    <i class="fas fa-shipping-fast mr-2"></i>Entregas
+                </a>
+                <a href="nuevo.html" class="block py-2 px-4 bg-blue-700">
+                    <i class="fas fa-plus-circle mr-2"></i>Nuevo Pedido
+                </a>
+            </nav>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="flex-1 p-6">
+            <header class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Nuevo Pedido</h1>
+                <p class="text-gray-600">Complete la información del pedido</p>
+            </header>
+
+            <form id="formNuevoPedido" class="bg-white rounded-lg shadow p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Columna 1 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Folio *</label>
+                            <input type="text" id="folio" class="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-100" readonly>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Cliente *</label>
+                            <input type="text" id="cliente" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+                            <input type="tel" id="telefono" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección *</label>
+                            <textarea id="direccion" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción del Trabajo *</label>
+                            <textarea id="descripcion" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Cantidad *</label>
+                            <input type="number" id="cantidad" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" min="1" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Precio Total *</label>
+                            <input type="number" id="precio" step="0.01" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Estado *</label>
+                            <select id="estado" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="autorizado">Autorizado</option>
+                                <option value="no-autorizado">No Autorizado</option>
+                                <option value="produccion">En Producción</option>
+                                <option value="listo">Listo</option>
+                                <option value="entregado">Entregado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Instalación *</label>
+                            <select id="instalacion" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="instalada">Instalada</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Entrega *</label>
+                            <input type="date" id="fechaEntrega" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Pago</label>
+                            <select id="pago" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="pendiente">Pendiente</option>
+                                <option value="parcial">Parcial</option>
+                                <option value="pagado">Pagado</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Arte Aprobado</label>
+                            <select id="arteAprobado" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="no">No</option>
+                                <option value="si">Sí</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Vendedor</label>
+                            <input type="text" id="vendedor" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Archivo de arte -->
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">medidas</label>
+                    <input type="file" id="archivoArte" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" accept=".jpg,.jpeg,.png,.pdf,.ai,.eps">
+                </div>
+
+                <!-- Botones -->
+                <div class="mt-8 flex justify-end space-x-4">
+                    <button type="button" onclick="window.history.back()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-save mr-2"></i>Guardar Pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+     </div><script type="module">
+    // Configuración de Supabase
+   const supabaseUrl = 'https://bxndijuuhmcklkiemtqr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4bmRpanV1aG1ja2xraWVtdHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyOTE1MzAsImV4cCI6MjA3Nzg2NzUzMH0.kwGLHv_hqrVxtbS5oeiMEQYf-ebJLKOE1n05KLtEpFY';
+        
+</script>
+
+    <script src="js/database.js"></script>
+    <script src="js/nuevo-pedido.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "sistema-lonas-caderayta",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de pedidos de lonas para Caderayta",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./css/tailwind.css -o ./css/output.css --watch",
+    "build": "tailwindcss -i ./css/tailwind.css -o ./css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  }
+}
